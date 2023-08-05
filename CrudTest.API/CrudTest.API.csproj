@@ -8,9 +8,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.1.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CrudTest.Application\CrudTest.Application.csproj" />
+      <ProjectReference Include="..\CrudTest.Infrastructure\CrudTest.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
