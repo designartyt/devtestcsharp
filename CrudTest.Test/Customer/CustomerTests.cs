@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Runtime.Serialization;
+using NUnit.Framework;
 using AutoFixture;
 using AutoFixture.NUnit3;
 using CrudTest.Domain.Customer.DomainServices;
@@ -87,6 +88,21 @@ public class CustomerTests
         }
     }
 
+    class customer_phoneNumber : CustomerTests
+    {
+        [Test]
+        [TestCase("+989121234567",true)]
+        [TestCase("+982188776655",false)]
+        [TestCase("+16156381234",true)]
+        public void should_phone_number_validation_result_as_expected_validation_result(string phoneNumber,bool expectedValidationResult)
+        {
+            var phoneNumberValidatorDomainService = new PhoneNumberValidatorDomainService();
+            var result=phoneNumberValidatorDomainService.ValidatePhoneNumber(phoneNumber);
+
+            result.Should().Be(expectedValidationResult);
+        }
+    }
+    
     class updating_customer : CustomerTests
     {
         [Test]

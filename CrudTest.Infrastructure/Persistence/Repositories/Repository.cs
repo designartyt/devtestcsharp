@@ -40,6 +40,11 @@ public class Repository<T>:IRepository<T> where T : AggregateRoot
        await SaveChangesAsync(cancellationToken);
     }
 
+    public IQueryable<T> QueryableEntity(T entity)
+    {
+        return _dbContext.Set<T>().AsQueryable();
+    }
+
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         return await _dbContext.SaveChangesAsync(cancellationToken);

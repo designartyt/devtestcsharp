@@ -10,9 +10,14 @@ public class PhoneNumberValidatorDomainService:IPhoneNumberValidatorDomainServic
         try
         {
             var phoneNumberUtil = PhoneNumberUtil.GetInstance();
-            return phoneNumberUtil.IsValidNumber(phoneNumberUtil.Parse(phoneNumber, "US"));
+            PhoneNumberType phoneNumberType = phoneNumberUtil.GetNumberType(phoneNumberUtil.Parse(phoneNumber, string.Empty));
+            
+            if (phoneNumberType == PhoneNumberType.MOBILE || 
+                phoneNumberType == PhoneNumberType.FIXED_LINE_OR_MOBILE)
+                return true;
+            return false;
         }
-        catch (Exception e)
+        catch (NumberParseException e)
         {
             return false;
         }
